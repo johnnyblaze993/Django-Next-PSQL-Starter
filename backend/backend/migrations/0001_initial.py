@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('mass_solar', models.FloatField()),
                 ('distance_from_center_ly', models.FloatField()),
                 ('description', models.TextField()),
-                ('galaxy', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='blackholes', to='pokedex.galaxy')),
+                ('galaxy', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='blackholes', to='backend.galaxy')),
             ],
         ),
         migrations.CreateModel(
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
                 ('mass_solar', models.FloatField()),
                 ('radius_solar', models.FloatField()),
                 ('description', models.TextField()),
-                ('galaxy', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='stars', to='pokedex.galaxy')),
+                ('galaxy', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='stars', to='backend.galaxy')),
             ],
         ),
         migrations.CreateModel(
@@ -56,8 +56,8 @@ class Migration(migrations.Migration):
                 ('mass_earth', models.FloatField()),
                 ('radius_earth', models.FloatField()),
                 ('habitable', models.BooleanField(default=False)),
-                ('galaxy', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='planets', to='pokedex.galaxy')),
-                ('star', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='planets', to='pokedex.star')),
+                ('galaxy', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='planets', to='backend.galaxy')),
+                ('star', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='planets', to='backend.star')),
             ],
         ),
     ]
