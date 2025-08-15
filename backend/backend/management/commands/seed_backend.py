@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from pokedex.models import Galaxy, Star, Planet, BlackHole
+from backend.models import Galaxy, Star, Planet, BlackHole
 
 class Command(BaseCommand):
     help = "Seeds the database with initial astronomy data"

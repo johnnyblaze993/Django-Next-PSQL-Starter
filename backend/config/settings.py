@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     # newly added apps
     'rest_framework',
-    'pokedex',
+    'backend',
     'corsheaders'
 ]
 
@@ -87,9 +87,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pokedex',
-        'USER': 'pokemaster',
-        'PASSWORD': 'pika123',
+        'NAME': 'backend',
+        'USER': 'backend',
+        'PASSWORD': 'backend',
         'HOST': 'db',
         'PORT': '5432',
     }

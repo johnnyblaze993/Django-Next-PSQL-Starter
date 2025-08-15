@@ -2,9 +2,9 @@ services:
   db:
     image: postgres:15
     environment:
-      POSTGRES_DB: pokedex
-      POSTGRES_USER: pokemaster
-      POSTGRES_PASSWORD: pika123
+      POSTGRES_DB: backend
+      POSTGRES_USER: backend
+      POSTGRES_PASSWORD: backend
     volumes:
       - pgdata:/var/lib/postgresql/data/
     ports:
@@ -12,7 +12,7 @@ services:
 
   backend:
     build: ./backend
-    command: sh -c "./wait-for-it.sh db:5432 -- python manage.py migrate && python manage.py seed_pokedex && python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "./wait-for-it.sh db:5432 -- python manage.py migrate && python manage.py seed_backend && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./backend:/app
     ports:
@@ -20,9 +20,9 @@ services:
     depends_on:
       - db
     environment:
-      - DB_NAME=pokedex
-      - DB_USER=pokemaster
-      - DB_PASS=pika123
+      - DB_NAME=backend
+      - DB_USER=backend
+      - DB_PASS=backend
       - DB_HOST=db
 
   frontend:

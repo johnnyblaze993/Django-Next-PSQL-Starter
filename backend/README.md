@@ -28,7 +28,7 @@ It manages galaxies, stars, planets, and black holes—served from a PostgreSQL 
     - To seed the DB (Docker handles this on up):  
 
       ```sh
-      docker compose exec backend python manage.py seed_pokedex
+      docker compose exec backend python manage.py seed_backend
       ```
 
     - To run migrations manually:  
@@ -41,13 +41,13 @@ It manages galaxies, stars, planets, and black holes—served from a PostgreSQL 
 
 ## 📁 Important Files & Folders
 
-- `pokedex/models.py`  
+- `backend/models.py`
   All Django models: Galaxy, Star, Planet, BlackHole (uses UUID).
-- `pokedex/views.py`  
+- `backend/views.py`
   API ViewSets for each resource (CRUD logic).
-- `pokedex/serializers.py`  
+- `backend/serializers.py`
   DRF serializers for JSON API.
-- `pokedex/management/commands/seed_pokedex.py`  
+- `backend/management/commands/seed_backend.py`
   Seeds astronomy data (galaxies, stars, etc.) for demonstration/testing.
 - `config/urls.py`  
   Root API route registration.
