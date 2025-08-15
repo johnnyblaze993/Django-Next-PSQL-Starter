@@ -1,0 +1,55 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: pokedex
+      POSTGRES_USER: pokemaster
+      POSTGRES_PASSWORD: pika123
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    command: sh -c "./wait-for-it.sh db:5432 -- python manage.py migrate && python manage.py seed_pokedex && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=pokedex
+      - DB_USER=pokemaster
+      - DB_PASS=pika123
+      - DB_HOST=db
+
+  frontend:
+    build:
+      context: ./frontend
+    # Remove the command; will use Dockerfile's CMD
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=development
+      - NODE_PATH=/install/node_modules
+    # volumes:
+    #   # Keep the bind mount for your source code, but don't try to manage node_modules here
+    #   - ./frontend:/app
+    develop:
+      watch:
+        - path: ./frontend
+          target: /app
+          action: sync
+          ignore:
+            - node_modules/
+            - .next/
+        - path: ./frontend/package.json
+          action: rebuild
+
+volumes:
+  pgdata:
