@@ -3,6 +3,7 @@
 import { CacheProvider, ThemeProvider, Global, css } from "@emotion/react";
 import createCache from "@emotion/cache";
 import React from "react";
+import QueryProvider from "./QueryProvider";
 
 const cache = createCache({ key: "css", prepend: true });
 
@@ -20,7 +21,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         <CacheProvider value={cache}>
             <ThemeProvider theme={theme}>
                 <Global styles={css`html,body{margin:0;padding:0;}`} />
-                {children}
+                <QueryProvider>
+                    {children}
+                </QueryProvider>
             </ThemeProvider>
         </CacheProvider>
     );

@@ -21,9 +21,7 @@ export default function PlantsPage() {
             <Card>
               <CardHeader as="h2">{plant.name}</CardHeader>
               <p>{plant.description}</p>
-              <p>
-                <strong>Price:</strong> ${plant.price.toFixed(2)}
-              </p>
+              <p><strong>Price:</strong> ${Number(plant.price).toFixed(2)}</p>
               {plant.accessories.length > 0 && (
                 <p>
                   <strong>Accessories:</strong> {plant.accessories.map((a) => a.name).join(", ")}

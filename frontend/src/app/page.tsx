@@ -18,12 +18,19 @@ export default function HomePage() {
                         </DescriptionBlock>
 
                         <Grid>
-                                <Tooltip text="View sample plants built with Next.js">
+                                <Tooltip text="View all plants in the store">
                                         <LinkButton href="/plants">Plants</LinkButton>
                                 </Tooltip>
-                                <Tooltip text="Learn how this setup works">
-                                        <LinkButton href="/tutorial">Tutorial</LinkButton>
+                                <Tooltip text="Browse plant categories">
+                                        <LinkButton href="/categories">Categories</LinkButton>
                                 </Tooltip>
+                                <Tooltip text="See available accessories">
+                                        <LinkButton href="/accessories">Accessories</LinkButton>
+                                </Tooltip>
+                                <Tooltip text="Get plant care tips">
+                                        <LinkButton href="/care-tips">Care Tips</LinkButton>
+                                </Tooltip>
+                                {/* Tutorial link removed */}
                         </Grid>
                 </section>
         );
