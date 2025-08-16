@@ -1,4 +1,5 @@
 // src/app/layout.tsx
+'use client'
 import QueryProvider from "./providers/QueryProvider";
 import { ThemeProvider, Global, css } from "@emotion/react";
 
@@ -21,12 +22,12 @@ export const metadata = {
 };
 
 export default function RootLayout({
-	children,
+        children,
 }: {
-	children: React.ReactNode;
+        children: React.ReactNode;
 }) {
-	return (
-		<html lang="en">
+        return (
+                <html lang="en">
                         <body>
                                 <ThemeProvider theme={theme}>
                                         <Global
