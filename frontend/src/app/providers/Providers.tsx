@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider, Global, css } from "@emotion/react";
+import { ThemeProvider, Global, css, Theme } from "@emotion/react";
 
-const theme = {
+const theme: Theme = {
     colors: {
         dark: "#1B5E20",
         medium: "#81C784",
