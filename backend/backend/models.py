@@ -1,46 +1,52 @@
 import uuid
 from django.db import models
 
-class Galaxy(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=100)
-    type = models.CharField(max_length=50)
-    distance_mly = models.FloatField()
-    description = models.TextField()
 
-class Star(models.Model):
+class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=100)
-    galaxy = models.ForeignKey(Galaxy, on_delete=models.CASCADE, related_name='stars')
-    type = models.CharField(max_length=50)
-    mass_solar = models.FloatField()
-    radius_solar = models.FloatField()
-    description = models.TextField()
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
 
-class Planet(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=100)
-    star = models.ForeignKey(Star, on_delete=models.CASCADE, related_name='planets')
-    galaxy = models.ForeignKey(Galaxy, on_delete=models.CASCADE, related_name='planets')
-    type = models.CharField(max_length=50)
-    mass_earth = models.FloatField()
-    radius_earth = models.FloatField()
-    habitable = models.BooleanField(default=False)
+    def __str__(self):
+        return self.name
 
-class BlackHole(models.Model):
+
+class Accessory(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
-    galaxy = models.ForeignKey(Galaxy, on_delete=models.CASCADE, related_name='blackholes')
-    type = models.CharField(max_length=50)
-    mass_solar = models.FloatField()
-    distance_from_center_ly = models.FloatField()
-    description = models.TextField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Plant(models.Model):
+    SUN_CHOICES = [
+        ("full", "Full Sun"),
+        ("partial", "Partial Shade"),
+        ("low", "Low Light"),
+    ]
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="plants")
     name = models.CharField(max_length=100)
     scientific_name = models.CharField(max_length=150)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     description = models.TextField()
     in_stock = models.BooleanField(default=True)
+    light = models.CharField(max_length=20, choices=SUN_CHOICES)
+    water = models.CharField(max_length=100)
+    accessories = models.ManyToManyField(Accessory, related_name="plants", blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class CareTip(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.title

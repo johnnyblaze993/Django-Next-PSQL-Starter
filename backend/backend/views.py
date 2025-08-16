@@ -1,19 +1,28 @@
 from rest_framework import viewsets
-from .models import Galaxy, Star, Planet, BlackHole
-from .serializers import GalaxySerializer, StarSerializer, PlanetSerializer, BlackHoleSerializer
+from .models import Category, Plant, Accessory, CareTip
+from .serializers import (
+    CategorySerializer,
+    PlantSerializer,
+    AccessorySerializer,
+    CareTipSerializer,
+)
 
-class GalaxyViewSet(viewsets.ModelViewSet):
-    queryset = Galaxy.objects.all()
-    serializer_class = GalaxySerializer
 
-class StarViewSet(viewsets.ModelViewSet):
-    queryset = Star.objects.all()
-    serializer_class = StarSerializer
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
-class PlanetViewSet(viewsets.ModelViewSet):
-    queryset = Planet.objects.all()
-    serializer_class = PlanetSerializer
 
-class BlackHoleViewSet(viewsets.ModelViewSet):
-    queryset = BlackHole.objects.all()
-    serializer_class = BlackHoleSerializer
+class PlantViewSet(viewsets.ModelViewSet):
+    queryset = Plant.objects.select_related('category').prefetch_related('accessories')
+    serializer_class = PlantSerializer
+
+
+class AccessoryViewSet(viewsets.ModelViewSet):
+    queryset = Accessory.objects.all()
+    serializer_class = AccessorySerializer
+
+
+class CareTipViewSet(viewsets.ModelViewSet):
+    queryset = CareTip.objects.all()
+    serializer_class = CareTipSerializer
