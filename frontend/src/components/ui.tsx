@@ -102,6 +102,7 @@ export const LinkButton = styled(Link)`
   justify-content: center;
   box-shadow: 0 2px 8px rgba(191,161,129,0.08);
 
+
   &:hover,
   &:focus {
     background: linear-gradient(90deg, ${({ theme }) => theme.colors.greenLight} 60%, ${({ theme }) => theme.colors.accent} 100%);
@@ -114,4 +115,5 @@ export const BackLink = styled(LinkButton)`
   width: 300px;
   margin: 0 auto 2rem;
   font-size: 1rem;
+    margin-top: 3rem;
 `;
