@@ -3,6 +3,25 @@
 import type { Metadata } from "next";
 import Providers from "./providers/Providers";
 import styled from "@emotion/styled";
+import { ThemeProvider, Theme } from "@emotion/react";
+
+declare module "@emotion/react" {
+        export interface Theme {
+                colors: {
+                        accent: string;
+                        dark: string;
+                        light: string;
+                };
+        }
+}
+
+const theme: Theme = {
+        colors: {
+                accent: "#ff6347",
+                dark: "#333",
+                light: "#f4f4f4",
+        },
+};
 
 export const metadata: Metadata = {
         title: "Plant Store Starter",
@@ -48,21 +67,23 @@ export default function RootLayout({
         children: React.ReactNode;
 }) {
         return (
-                <html lang="en">
-                        <body>
-                                <Providers>
-                                        <LayoutWrapper>
-                                                <NavHeader>
-                                                        <span role="img" aria-label="plant" style={{ fontSize: 32, marginRight: 8 }}>
-                                                                🌱
-                                                        </span>
-                                                        Plant Store Demo
-                                                </NavHeader>
-                                                <Content>{children}</Content>
-                                                <Footer>Dev environment</Footer>
-                                        </LayoutWrapper>
-                                </Providers>
-                        </body>
-                </html>
+                <ThemeProvider theme={theme}>
+                        <html lang="en">
+                                <body>
+                                        <Providers>
+                                                <LayoutWrapper>
+                                                        <NavHeader>
+                                                                <span role="img" aria-label="plant" style={{ fontSize: 32, marginRight: 8 }}>
+                                                                        🌱
+                                                                </span>
+                                                                Plant Store Demo
+                                                        </NavHeader>
+                                                        <Content>{children}</Content>
+                                                        <Footer>Dev environment</Footer>
+                                                </LayoutWrapper>
+                                        </Providers>
+                                </body>
+                        </html>
+                </ThemeProvider>
         );
 }
