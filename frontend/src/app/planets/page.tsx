@@ -2,43 +2,41 @@
 import { BackButton } from "@/components/BackButton";
 import { Loading } from "@/components/Loading";
 import { usePlanets } from "@/features/planets/usePlanets";
-import "@/styles/components.css";
+import { Heading, Description, Grid, Card, CardHeader } from "@/components/ui";
 
 export default function PlanetsPage() {
-	const { data, isLoading, isError } = usePlanets();
+        const { data, isLoading, isError } = usePlanets();
 
-	if (isLoading) return <Loading />;
-	{
-		isError && <div>Error loading planets.</div>;
-	}
-	return (
-		<section>
-			<h1 className="heading">Planets</h1>
-			<p className="mb-2 description">
-				Discover the planets across various stars and galaxies.
-			</p>
-			<BackButton href="/">Back to Home</BackButton>
+        if (isLoading) return <Loading />;
+        if (isError) return <div>Error loading planets.</div>;
+        return (
+                <section>
+                        <Heading>Planets</Heading>
+                        <Description>
+                                Discover the planets across various stars and galaxies.
+                        </Description>
+                        <BackButton href="/">Back to Home</BackButton>
 
-			<div className="grid">
-				{data &&
-					data.map((planet) => (
-						<div className="card" key={planet.id}>
-							<div className="card-header">{planet.name}</div>
-							<div>
-								<strong>Type:</strong> {planet.type}
-							</div>
-							<div>
-								<strong>Mass:</strong> {planet.mass_earth} Earth masses
-							</div>
-							<div>
-								<strong>Radius:</strong> {planet.radius_earth} Earth radii
-							</div>
-							<div>
-								<strong>Habitable:</strong> {planet.habitable ? "Yes" : "No"}
-							</div>
-						</div>
-					))}
-			</div>
-		</section>
-	);
+                        <Grid>
+                                {data &&
+                                        data.map((planet) => (
+                                                <Card key={planet.id}>
+                                                        <CardHeader>{planet.name}</CardHeader>
+                                                        <div>
+                                                                <strong>Type:</strong> {planet.type}
+                                                        </div>
+                                                        <div>
+                                                                <strong>Mass:</strong> {planet.mass_earth} Earth masses
+                                                        </div>
+                                                        <div>
+                                                                <strong>Radius:</strong> {planet.radius_earth} Earth radii
+                                                        </div>
+                                                        <div>
+                                                                <strong>Habitable:</strong> {planet.habitable ? "Yes" : "No"}
+                                                        </div>
+                                                </Card>
+                                        ))}
+                        </Grid>
+                </section>
+        );
 }
