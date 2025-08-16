@@ -9,10 +9,16 @@ const cache = createCache({ key: "css", prepend: true });
 
 export const theme = {
     colors: {
-        accent: "#1B56FD",   // <-- REQUIRED by LayoutShell
-        dark: "#0A0A0A",
-        light: "#F7F7F7",
-        medium: "#808782",
+        accent: "#BFA181", // gold accent
+        dark: "#23272F",   // deep slate
+        light: "#F5F5F3",  // off-white
+        medium: "#6C757D", // muted slate
+        green: "#3A5A40",  // elegant green
+        greenLight: "#A3B18A", // soft green
+    },
+    font: {
+        family: '"Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        heading: '"Playfair Display", serif',
     },
 };
 
