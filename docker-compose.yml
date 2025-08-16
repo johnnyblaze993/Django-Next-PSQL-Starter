@@ -28,28 +28,17 @@ services:
   frontend:
     build:
       context: ./frontend
-    # Remove the command; will use Dockerfile's CMD
     ports:
       - "3000:3000"
-    depends_on:
-      - backend
     environment:
-      - CHOKIDAR_USEPOLLING=true
       - NODE_ENV=development
-      - NODE_PATH=/install/node_modules
-    # volumes:
-    #   # Keep the bind mount for your source code, but don't try to manage node_modules here
-    #   - ./frontend:/app
-    develop:
-      watch:
-        - path: ./frontend
-          target: /app
-          action: sync
-          ignore:
-            - node_modules/
-            - .next/
-        - path: ./frontend/package.json
-          action: rebuild
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend # <-- ONLY the service name here
 
 volumes:
   pgdata:
