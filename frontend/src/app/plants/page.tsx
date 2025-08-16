@@ -1,8 +1,9 @@
+/** @jsxImportSource @emotion/react */
 "use client";
 
 import Link from "next/link";
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
+import { css, useTheme } from "@emotion/react";
 
 const plants = [
   { id: 1, name: "Aloe Vera", description: "Soothing succulent." },
@@ -24,11 +25,13 @@ const Card = styled.div`
 `;
 
 export default function PlantsPage() {
+  const theme = useTheme();
+  
   return (
     <section>
       <h1
         css={css`
-          color: ${(theme) => theme.colors.light};
+          color: ${theme.colors.light};
         `}
       >
         Plants

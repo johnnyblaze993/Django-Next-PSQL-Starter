@@ -1,20 +1,11 @@
 // src/app/layout.tsx
-'use client'
 import QueryProvider from "./providers/QueryProvider";
-import { ThemeProvider, Global, css } from "@emotion/react";
+import ThemeProvider from "./providers/ThemeProvider";
 
 // Optional: legacy css imports retained for base layout
 import "@/styles/global.css";
 import "@/styles/layout.css";
 import "@/styles/components.css";
-
-const theme = {
-        colors: {
-                dark: "#656565",
-                medium: "#808782",
-                light: "#A6D3A0",
-        },
-};
 
 export const metadata = {
         title: "Plant Store Starter",
@@ -29,15 +20,7 @@ export default function RootLayout({
         return (
                 <html lang="en">
                         <body>
-                                <ThemeProvider theme={theme}>
-                                        <Global
-                                                styles={css`
-                                                        body {
-                                                                background: ${theme.colors.dark};
-                                                                color: ${theme.colors.light};
-                                                        }
-                                                `}
-                                        />
+                                <ThemeProvider>
                                         <QueryProvider>
                                                 <div className="layout-wrapper">
                                                         <header className="nav-header">

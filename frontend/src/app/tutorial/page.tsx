@@ -1,14 +1,17 @@
+/** @jsxImportSource @emotion/react */
 "use client";
 
 import Link from "next/link";
-import { css } from "@emotion/react";
+import { css, useTheme } from "@emotion/react";
 
 export default function TutorialHome() {
+  const theme = useTheme();
+  
   return (
     <section>
       <h1
         css={css`
-          color: ${(theme) => theme.colors.light};
+          color: ${theme.colors.light};
         `}
       >
         Tutorial Home
