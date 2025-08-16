@@ -35,3 +35,12 @@ class BlackHole(models.Model):
     mass_solar = models.FloatField()
     distance_from_center_ly = models.FloatField()
     description = models.TextField()
+
+
+class Plant(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=100)
+    scientific_name = models.CharField(max_length=150)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    description = models.TextField()
+    in_stock = models.BooleanField(default=True)
