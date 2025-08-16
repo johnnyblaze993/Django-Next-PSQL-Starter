@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 // no "use client"
 import type { Metadata } from "next";
 import Providers from "./providers/Providers";
+=======
+// src/app/layout.tsx
+'use client'
+import QueryProvider from "./providers/QueryProvider";
+import { ThemeProvider, Global, css } from "@emotion/react";
+>>>>>>> 37e6f131f0035b71ca115160ea714bf47caa6392
 
 import "@/styles/global.css";
 import "@/styles/layout.css";
@@ -11,7 +18,15 @@ export const metadata: Metadata = {
         description: "Demo application showcasing plants with Next.js and Django",
 };
 
+<<<<<<< HEAD
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+=======
+export default function RootLayout({
+        children,
+}: {
+        children: React.ReactNode;
+}) {
+>>>>>>> 37e6f131f0035b71ca115160ea714bf47caa6392
         return (
                 <html lang="en">
                         <body>
