@@ -3,24 +3,32 @@
 import { Grid, Card, Heading, Description, CardHeader } from "@/components/ui";
 import { Tooltip } from "@/components/Tooltip";
 import { BackButton } from "@/components/BackButton";
-
-const plants = [
-  { id: 1, name: "Aloe Vera", description: "Soothing succulent." },
-  { id: 2, name: "Snake Plant", description: "Hardy and air-purifying." },
-  { id: 3, name: "Peace Lily", description: "Elegant flowering plant." },
-];
+import { Loading } from "@/components/Loading";
+import { usePlants } from "@/features/plants/usePlants";
 
 export default function PlantsPage() {
+  const { data, isLoading, isError } = usePlants();
+  if (isLoading) return <Loading />;
+  if (isError) return <div>Error loading plants.</div>;
+
   return (
     <section>
       <Heading>Plants</Heading>
-      <Description>Explore our small collection of starter plants.</Description>
+      <Description>Explore our collection of starter plants.</Description>
       <Grid>
-        {plants.map((plant) => (
-          <Tooltip key={plant.id} text="Styled with Emotion">
+        {data?.map((plant) => (
+          <Tooltip key={plant.id} text={plant.scientific_name}>
             <Card>
               <CardHeader as="h2">{plant.name}</CardHeader>
               <p>{plant.description}</p>
+              <p>
+                <strong>Price:</strong> ${plant.price.toFixed(2)}
+              </p>
+              {plant.accessories.length > 0 && (
+                <p>
+                  <strong>Accessories:</strong> {plant.accessories.map((a) => a.name).join(", ")}
+                </p>
+              )}
             </Card>
           </Tooltip>
         ))}
