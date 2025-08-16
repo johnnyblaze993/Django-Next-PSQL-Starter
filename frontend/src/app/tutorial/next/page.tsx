@@ -1,23 +1,16 @@
 "use client";
 
-import Link from "next/link";
-import { css } from "@emotion/react";
+import { Heading, LinkButton } from "@/components/ui";
+import { Tooltip } from "@/components/Tooltip";
 
 export default function TutorialNext() {
   return (
     <section>
-      <h1
-        css={css`
-          color: ${(theme) => theme.colors.light};
-        `}
-      >
-        Next Page
-      </h1>
+      <Heading>Next Page</Heading>
       <p>This is a nested route under /tutorial/next.</p>
-      <p>
-        <Link href="/tutorial">Back to tutorial home</Link>
-      </p>
+      <Tooltip text="Back with Next.js Link">
+        <LinkButton href="/tutorial">Back to tutorial home</LinkButton>
+      </Tooltip>
     </section>
   );
 }
-

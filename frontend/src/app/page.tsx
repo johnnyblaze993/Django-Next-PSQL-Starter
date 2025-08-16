@@ -1,33 +1,30 @@
 // src/app/page.tsx
-import "@/styles/components.css";
-import "@/styles/global.css";
-import Link from "next/link";
+import { DescriptionBlock, Highlight, Grid, LinkButton } from "@/components/ui";
+import { Tooltip } from "@/components/Tooltip";
 
 export default function HomePage() {
         return (
                 <section>
-                        <div className="description-block">
+                        <DescriptionBlock>
                                 <p>
-                                        <span className="highlight">Docker</span>,{" "}
-                                        <span className="highlight">Django</span>, and
-                                        <span className="highlight"> Next.js</span> power this starter
-                                        project.
+                                        <Highlight>Docker</Highlight>, <Highlight>Django</Highlight>, and
+                                        <Highlight> Next.js</Highlight> power this starter project.
                                 </p>
                                 <p
                                         style={{ marginTop: "1.5rem", fontWeight: 700, textAlign: "center" }}
                                 >
                                         Select an option below.
                                 </p>
-                        </div>
+                        </DescriptionBlock>
 
-                        <div className="grid">
-                                <Link href="/plants" className="link">
-                                        Plants
-                                </Link>
-                                <Link href="/tutorial" className="link">
-                                        Tutorial
-                                </Link>
-                        </div>
+                        <Grid>
+                                <Tooltip text="View sample plants built with Next.js">
+                                        <LinkButton href="/plants">Plants</LinkButton>
+                                </Tooltip>
+                                <Tooltip text="Learn how this setup works">
+                                        <LinkButton href="/tutorial">Tutorial</LinkButton>
+                                </Tooltip>
+                        </Grid>
                 </section>
         );
 }
